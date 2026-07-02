@@ -10,6 +10,9 @@ export const AuthService = {
       throw new Error("USER_NOT_FOUND");
     }
 
+    const pw = await bcrypt.hash(password, 10);
+    console.log(pw);
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {

@@ -1,0 +1,56 @@
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzgzMDIxMTYwLCJleHAiOjE3ODMwMjQ3NjB9.BYN53pB56K85PK5QdLkSHJr57G1OSL_sDvXqmaxAO4Q
+
+### 1. Criar um novo Usuário (Rota Pública)
+# Qualquer pessoa pode criar um cadastro (não exige token).
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "Novo Usuário Teste",
+  "email": "novo.teste@email.com",
+  "password": "123456",
+  "role": "user"
+}
+
+### 2. Tentar criar Usuário com E-mail já existente (Rota Pública)
+# Deve retornar erro 409 - Conflito.
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "Clone do Admin",
+  "email": "admin@email.com",
+  "password": "123456",
+  "role": "user"
+}
+
+# ROTAS PROTEGIDAS (Exigem a variável @token preenchida acima)
+
+### 3. Listar Todos os Usuários
+# Requisito: Apenas o Administrador (role: 'admin') pode executar com sucesso.
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 4. Buscar um Usuário Específico (Substitua o ID '1' pelo ID desejado)
+# Requisito: Administrador ou o próprio dono do perfil.
+GET {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 5. Atualizar o Próprio Perfil ou de Outro (Substitua o ID '1')
+# Requisito: Administrador ou o próprio dono do perfil.
+PUT {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Nome Atualizado via REST Client",
+  "password": "nova_senha_segura"
+}
+
+### 6. Excluir um Usuário (Soft Delete) (Substitua o ID '2')
+# Requisito: Apenas o Administrador (role: 'admin') pode executar com sucesso.
+DELETE {{baseUrl}}/users/2
+Authorization: Bearer {{token}}

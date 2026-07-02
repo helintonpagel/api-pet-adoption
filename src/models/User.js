@@ -49,11 +49,11 @@ export const User = {
     const query = `UPDATE users SET ${fields.join(", ")} WHERE id = ? AND deleted_at IS NULL`;
     const [result] = await pool.query(query, values);
 
-    return result.affectedRows > 0 ? { id, ...user } : null;
+    return result.affectedRows > 0 ? { id, name: user.name, email: user.email, role: user.role } : null;
   },
 
   async delete(id) {
-    const [result] = await pool.query("UPDATE users SET deleted_at = NOW() WHERE id = ?", [id]);
+    const [result] = await pool.query("UPDATE users SET deleted_at = NOW() WHERE id = ? AND deleted_at IS NULL", [id]);
     return result.affectedRows > 0;
   },
 };
