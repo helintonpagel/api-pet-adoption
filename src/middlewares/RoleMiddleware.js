@@ -6,6 +6,13 @@ export const RoleMiddleware = {
     next();
   },
 
+  requireUser(req, res, next) {
+    if (req.user.role !== "user") {
+      return res.status(403).json({ error: "FORBIDDEN" });
+    }
+    next();
+  },
+
   requireOwner(req, res, next) {
     const userId = parseInt(req.params.id, 10);
     if (req.user.id !== userId && req.user.role !== "admin") {
