@@ -51,13 +51,12 @@ export const UserController = {
 
   async delete(req, res) {
     try {
-      const success = await UserService.delete(req.params.id);
-      if (success) {
-        res.status(204).send();
-      } else {
-        res.status(404).json({ error: "USER_NOT_FOUND" });
-      }
+      await UserService.delete(req.params.id);
+      res.status(204).send();
     } catch (error) {
+      if (error.message === "USER_NOT_FOUND") {
+        return res.status(404).json({ error: error.message });
+      }
       res.status(500).json({ error: error.message });
     }
   },
