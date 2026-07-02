@@ -29,7 +29,7 @@ export const UserController = {
       res.status(201).json(user);
     } catch (error) {
       if (error.message === "USER_ALREADY_EXISTS") {
-        res.status(400).json({ error: error.message });
+        res.status(409).json({ error: error.message });
       } else {
         res.status(500).json({ error: error.message });
       }
@@ -41,8 +41,10 @@ export const UserController = {
       const user = await UserService.update(req.params.id, req.body);
       res.json(user);
     } catch (error) {
-      if (error.message === "USER_NOT_FOUND" || error.message === "EMAIL_ALREADY_EXISTS") {
-        res.status(400).json({ error: error.message });
+      if (error.message === "USER_NOT_FOUND") {
+        res.status(404).json({ error: error.message });
+      } else if (error.message === "EMAIL_ALREADY_EXISTS") {
+        res.status(409).json({ error: error.message });
       } else {
         res.status(500).json({ error: error.message });
       }
