@@ -63,7 +63,6 @@ Abaixo está o script SQL para a criação das tabelas necessárias para o funci
 
 ```sql
 CREATE DATABASE IF NOT EXISTS pets_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 USE pets_db;
 
 SET NAMES utf8mb4;
@@ -91,6 +90,7 @@ CREATE TABLE IF NOT EXISTS pets (
   breed VARCHAR(255) NULL,
   color VARCHAR(255) NULL,
   size ENUM('small', 'medium', 'large', 'extra-large') NOT NULL,
+  weight DECIMAL(5,2) NULL,
   status ENUM('available', 'adopted') NOT NULL DEFAULT 'available',
   description TEXT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
