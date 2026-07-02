@@ -2,17 +2,22 @@ import { pool } from "../config/pool.js";
 
 export const User = {
   async getAll() {
-    const [rows] = await pool.query("SELECT * FROM users");
+    const [rows] = await pool.query(
+      "SELECT id, name, email, role, created_at, updated_at FROM users where deleted_at IS NULL",
+    );
     return rows;
   },
 
   async getOne(id) {
-    const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [id]);
+    const [rows] = await pool.query(
+      "SELECT id, name, email, role, created_at, updated_at FROM users WHERE id = ? AND deleted_at IS NULL",
+      [id],
+    );
     return rows[0];
   },
 
   async getByEmail(email) {
-    const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
+    const [rows] = await pool.query("SELECT * FROM users WHERE email = ? AND deleted_at IS NULL", [email]);
     return rows[0];
   },
 
@@ -41,14 +46,14 @@ export const User = {
 
     values.push(id);
 
-    const query = `UPDATE users SET ${fields.join(", ")} WHERE id = ?`;
+    const query = `UPDATE users SET ${fields.join(", ")} WHERE id = ? AND deleted_at IS NULL`;
     const [result] = await pool.query(query, values);
 
     return result.affectedRows > 0 ? { id, ...user } : null;
   },
 
   async delete(id) {
-    const [result] = await pool.query("DELETE FROM users WHERE id = ?", [id]);
+    const [result] = await pool.query("UPDATE users SET deleted_at = NOW() WHERE id = ?", [id]);
     return result.affectedRows > 0;
   },
 };
