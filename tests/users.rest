@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzgzMDIxMTYwLCJleHAiOjE3ODMwMjQ3NjB9.BYN53pB56K85PK5QdLkSHJr57G1OSL_sDvXqmaxAO4Q
+@token = TOKEN_AQUI
 
 ### 1. Criar um novo Usuário (Rota Pública)
 # Qualquer pessoa pode criar um cadastro (não exige token).
@@ -14,7 +14,6 @@ Content-Type: application/json
 }
 
 ### 2. Tentar criar Usuário com E-mail já existente (Rota Pública)
-# Deve retornar erro 409 - Conflito.
 POST {{baseUrl}}/users
 Content-Type: application/json
 

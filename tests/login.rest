@@ -1,7 +1,6 @@
 @baseUrl = http://localhost:3000
 
 ### 1. Login com sucesso (Administrador)
-# Deve retornar o token JWT e os dados do usuário (sem a senha).
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
@@ -11,7 +10,6 @@ Content-Type: application/json
 }
 
 ### 2. Login com sucesso (Usuário Comum / Adopter)
-# Deve retornar o token JWT e os dados do usuário (sem a senha).
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
@@ -21,7 +19,6 @@ Content-Type: application/json
 }
 
 ### 3. Falha no Login (Senha Incorreta)
-# Deve retornar erro 401 - Credenciais inválidas.
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
@@ -31,7 +28,6 @@ Content-Type: application/json
 }
 
 ### 4. Falha no Login (E-mail Inexistente)
-# Deve retornar erro 401 - Credenciais inválidas.
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 

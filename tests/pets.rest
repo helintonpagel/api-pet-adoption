@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzgzMDI0ODQ3LCJleHAiOjE3ODMwMjg0NDd9.K-o7yjweK60loIR7UNR38zraOzDS6ETo76L4YLLys8A
+@token = TOKEN_AQUI
 
 ### 1. Listar Todos os Pets
 GET {{baseUrl}}/pets
@@ -9,10 +9,9 @@ Content-Type: application/json
 GET {{baseUrl}}/pets/1
 Content-Type: application/json
 
-# ROTAS PROTEGIDAS (Exigem a variável @token preenchida com perfil ADMIN)
+# ROTAS PROTEGIDAS (Exigem a variável @token preenchida acima)
 
 ### 3. Cadastrar um Novo Pet (Apenas Administrador)
-# Status deve começar como 'available' automaticamente pelo Model.
 POST {{baseUrl}}/pets
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -29,8 +28,7 @@ Content-Type: application/json
 }
 
 ### 4. Atualizar os dados de um Pet (Apenas Administrador)
-# Substitua o ID '1' pelo ID do pet criado no passo anterior.
-PUT {{baseUrl}}/pets/1
+PUT {{baseUrl}}/pets/5
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -41,7 +39,5 @@ Content-Type: application/json
 }
 
 ### 5. Excluir um Pet (Soft Delete) (Apenas Administrador)
-# Substitua o ID '1' pelo ID do pet que deseja excluir.
-# Deve retornar 204 No Content.
 DELETE {{baseUrl}}/pets/5
 Authorization: Bearer {{token}}

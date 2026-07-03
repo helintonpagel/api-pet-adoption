@@ -20,7 +20,7 @@ export const Adoption = {
 
       const [result] = await connection.query("INSERT INTO adoptions (user_id, pet_id) VALUES (?, ?)", [userId, petId]);
 
-      await connection.query("UPDATE pets SET status = 'adopted' WHERE id = ?", [petId]);
+      await connection.query("UPDATE pets SET status = 'adopted' WHERE id = ? AND deleted_at IS NULL", [petId]);
       await connection.commit();
       return { id: result.insertId, user_id: userId, pet_id: petId, adoption_date: new Date() };
     } catch (error) {

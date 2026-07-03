@@ -2,12 +2,12 @@ import { pool } from "../config/pool.js";
 
 export const Pet = {
   async getAll() {
-    const [rows] = await pool.query("SELECT * FROM pets");
+    const [rows] = await pool.query("SELECT * FROM pets WHERE deleted_at IS NULL");
     return rows;
   },
 
   async getOne(id) {
-    const [rows] = await pool.query("SELECT * FROM pets WHERE id = ?", [id]);
+    const [rows] = await pool.query("SELECT * FROM pets WHERE id = ? AND deleted_at IS NULL", [id]);
     return rows[0];
   },
 

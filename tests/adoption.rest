@@ -1,8 +1,8 @@
 @baseUrl = http://localhost:3000
-@tokenUser = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3ODMwMjY2NjIsImV4cCI6MTc4MzAzMDI2Mn0.lzFOOjOVQ_iKDJIOOel6FiV_UHSOX7FdrHj7CDIrMI8
-@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzgzMDI3NDMzLCJleHAiOjE3ODMwMzEwMzN9.YlJy-pGJ2iJskkQxdLXpxgdC3xwzYyMDbr6tx-Gj1A8
+@tokenUser = TOKEN_AQUI
+@tokenAdmin = ADMIN_TOKEN_AQUI
 
-### 1. Adotar um Pet (Requisito: role 'user')
+### 1. Adotar um Pet (Usuário Comum)
 POST {{baseUrl}}/adoptions
 Authorization: Bearer {{tokenUser}}
 Content-Type: application/json
@@ -22,7 +22,7 @@ Content-Type: application/json
 
 # TESTE DE RELATÓRIO (Exige token de ADMIN)
 
-### 3. Listar Histórico de Adoções (Requisito: role 'admin')
+### 3. Listar Histórico de Adoções (Administrador)
 GET {{baseUrl}}/adoptions
 Authorization: Bearer {{tokenAdmin}}
 Content-Type: application/json
