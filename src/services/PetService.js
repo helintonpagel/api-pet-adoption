@@ -16,8 +16,14 @@ export const PetService = {
   },
 
   async create(pet) {
-    // TODO: adicionar validações de negócio aqui, como garantir que
-    // a data de nascimento não é no futuro, etc.
+    if (!pet.name || !pet.birth_date || !pet.gender || !pet.species || !pet.size) {
+      throw new Error("MISSING_REQUIRED_FIELDS");
+    }
+
+    if (new Date(pet.birth_date) > new Date()) {
+      throw new Error("INVALID_BIRTH_DATE");
+    }
+
     return await Pet.create(pet);
   },
 

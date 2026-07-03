@@ -31,30 +31,4 @@ export const AdoptionController = {
       }
     }
   },
-
-  async update(req, res) {
-    try {
-      const adoption = await AdoptionService.update(req.params.id, req.body);
-      res.json(adoption);
-    } catch (error) {
-      if (error.message === "ADOPTION_NOT_FOUND") {
-        res.status(404).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: error.message });
-      }
-    }
-  },
-
-  async delete(req, res) {
-    try {
-      await AdoptionService.delete(req.params.id);
-      res.status(204).send();
-    } catch (error) {
-      if (error.message === "ADOPTION_NOT_FOUND") {
-        return res.status(404).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: error.message });
-      }
-    }
-  },
 };
